@@ -1,5 +1,3 @@
 screens:
   default:
-    background: img/backgrounds/curtain.webp
-  game:
-    background: img/backgrounds/map.webp
+    background: img/backgrounds/background.png

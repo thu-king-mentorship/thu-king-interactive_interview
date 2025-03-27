@@ -1,20 +1,41 @@
-skills: {}
+skills:
+  logic:
+    name: Logic
+    description: Your analytical reasoning ability
+    startingLevel: 0
+    icon: img/skills/logic.png
+    hidden: true
+  charisma:
+    name: Charisma
+    description: Your persuasive and social fluency
+    startingLevel: 0
+    icon: img/skills/charisma.png
+    hidden: true
+  empathy:
+    name: Empathy
+    description: Your emotional intelligence and ability to read people
+    startingLevel: 0
+    icon: img/skills/empathy.png
+    hidden: true
+  drive:
+    name: Drive
+    description: Your ambition and determination to dig deeper
+    startingLevel: 0
+    icon: img/skills/drive.png
+    hidden: true
+  intuition:
+    name: Intuition
+    description: Your instinctive understanding of subtext and emotion
+    startingLevel: 0
+    icon: img/skills/intuition.png
+    hidden: true
 skillChecks:
-  rollRange: 100
-  skillMultiplier: 10
+  rollRange: 20
+  skillMultiplier: 1
   failureChance: 1
   difficultyText:
-    - - 0
-      - Very Easy
-    - - 10
-      - Easy
-    - - 30
-      - Medium
-    - - 50
-      - Hard
-    - - 70
-      - Very Hard
-    - - 80
-      - Extremely Hard
-    - - 90
-      - Near Impossible
+    - [1, "Critical Miss"]
+    - [2, "Low"]
+    - [10, "Medium"]
+    - [15, "High"]
+    - [20, "Critical Hit"]

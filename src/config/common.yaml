@@ -1,6 +1,6 @@
 ---
-gameTitle: Narrat Game Example
-saveFileName: Narrat Empty
+gameTitle: Salvador Banderas Rovira - Interactive Interview
+saveFileName: Salva Interview
 images: {}
 dialogPanel:
   textSpeed: 30
@@ -39,9 +39,10 @@ interactionTags:
   default:
     onlyInteractOutsideOfScripts: true
 saves:
+  disabled: true
   mode: manual
   slots: 10
-  runOnReload: 'test_label_reload'
+  runOnReload: "test_label_reload"
   autosaveDisabledOnLabels:
     - test_no_autosave
   allowManualSave: true
@@ -49,8 +50,8 @@ saves:
     enabled: true
     duration: 0.5
     text: saving...
-    backgroundImage: 'img/ui/autosave_spinner_background.png'
-    foregroundImage: 'img/ui/autosave_spinner.png'
+    backgroundImage: "img/ui/autosave_spinner_background.png"
+    foregroundImage: "img/ui/autosave_spinner.png"
 menuButtons:
   new-game:
     text: Start a new game

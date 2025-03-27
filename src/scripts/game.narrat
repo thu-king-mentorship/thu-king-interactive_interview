@@ -1,4 +1,29 @@
 main:
-  "Hello world"
-  set_screen game 0 slide-top 1000
-  "(This game is empty so nothing will happen past this point. Open game.narrat to start editing)"
+  "You stare at the blinking cursor. You are... someone important."
+  think player idle "Am I logic?"
+  add_level logic (random 1 6)
+  think player idle "Am I charismatic?"
+  add_level charisma (random 1 6)
+  think player idle "Am I empathetic?"
+  add_level empathy (random 1 6)
+  think player idle "Am I driven?"
+  add_level drive (random 1 6)
+  think player idle "Am I intuitive?"
+  add_level intuition (random 1 6)
+  "...Good."
+  jump role_choice
+
+role_choice:
+  think player idle "Who am I?"
+  choice
+    "I am..."
+    "...a recruiter from a big game company. I am looking for the next big thing."
+      jump recruiter_scene
+    "...the boss of a small indie game company. I need to find the right people to make my dream game."
+      jump indie_scene
+    "...someone looking for a collaborator to make a game with."
+      jump collab_scene
+    "...Salva."
+      jump salva_scene
+    "...I don't know."
+      jump unknown_scene

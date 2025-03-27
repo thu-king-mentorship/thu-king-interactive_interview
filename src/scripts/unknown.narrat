@@ -1,0 +1,3 @@
+unknown_scene:
+  talk salva idle "This role exists only in my imaginarium. You may choose another."
+  jump role_choice
