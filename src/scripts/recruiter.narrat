@@ -1,3 +1,47 @@
 recruiter_scene:
-  talk salva idle "This role exists only in my imaginarium. You may choose another."
-  jump role_choice
+  set current_phase "phase0"
+  set phases (new Object)
+  set phases.phase1 0
+  set phases.phase2 0
+  set phases.phase3 0
+  set phases.phase4 0
+  set phases.phase5 0
+  set phases.phase6 0
+  "Salva enters the room, looking eager to discuss the project."
+  talk player idle "Good morning, Salva. I have a few questions regarding your recent work."
+  talk salva idle "Of course, I'm happy to answer any questions you have."
+  think player idle "I should consider which aspects to focus on during this discussion."
+  jump phase1_jump
+
+increase_phase:
+  add phases[$current_phase] 1
+
+phase1_jump:
+  "Phase 1: Background & Motivation"
+  set current_phase "phase1"
+  jump phase1
+
+phase1:
+  if (>= $phases.phase1 2)
+    jump phase2_jump
+  run increase_phase
+  choice
+    think player idle "Choice text"
+    "Question 1 (Only if enough skill level)" if (>= (get_level logic) 3):
+      talk salva idle "Answer to Question 1 (Unique)"
+    roll empathyCheck empathy 15 "Question 2 (Empathy Check)"
+      if empathyCheck:
+        talk salva idle "Answer to Question 2 (Success)"
+      else:
+        talk salva idle "Answer to Question 2 (Failure)"
+    "Question 3 (Always)":
+      talk salva idle "Answer to Question 3 (Always)"
+  jump phase1
+
+phase2_jump:
+  "Phase 2: Technical & Craft Skills"
+  set current_phase "phase2"
+  jump phase2
+
+phase2:
+  "Lorem ipsum dolor sit amet!!!"
