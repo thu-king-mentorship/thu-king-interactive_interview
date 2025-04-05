@@ -7,14 +7,19 @@ recruiter_scene:
   set phases.phase4 0
   set phases.phase5 0
   set phases.phase6 0
-  "Salva enters the room, looking eager to discuss the project."
-  talk player idle "Good morning, Salva. I have a few questions regarding your recent work."
-  talk salva idle "Of course, I'm happy to answer any questions you have."
-  think player idle "I should consider which aspects to focus on during this discussion."
-  jump phase1_jump
+  jump intro_scene
 
 increase_phase:
   add phases[$current_phase] 1
+
+intro_scene:
+  "You sit at a table made of glass, warm to the touch. A file lies in front of you—blank. The lights flicker, just once, as if reality is catching its breath."
+  "Across from you, a door opens."
+  "Salva steps in, not with swagger, but with a deliberate calm. His outfit is sharp but not showy, his posture balanced between humble and unafraid. But your eyes are drawn to the strange artifact around his neck—a swirling pendant, faintly humming with a golden pulse."
+  talk lore idle "L’Amulet d’Auteur. A rumored relic of narrative resilience. It’s said that no question can truly undo him—not because he knows everything, but because he knows himself."
+  talk salva idle "I’m ready when you are."
+  think player idle "(Think) Who are you?"
+  jump phase1_jump
 
 phase1_jump:
   "Phase 1: Background & Motivation"
@@ -25,17 +30,31 @@ phase1:
   if (>= $phases.phase1 2)
     jump phase2_jump
   run increase_phase
-  choice
-    think player idle "Choice text"
-    "Question 1 (Only if enough skill level)" if (>= (get_level logic) 3):
-      talk salva idle "Answer to Question 1 (Unique)"
-    roll empathyCheck empathy 15 "Question 2 (Empathy Check)"
-      if empathyCheck:
-        talk salva idle "Answer to Question 2 (Success)"
+
+  choice:
+    "What should I know about his background?"
+
+    "What first drew you to game development?":
+      talk salva idle "Honestly? I was already building worlds in my head as a kid. Learning code just gave me the syntax."
+
+    "Your background isn’t typical. How do you explain your path to where you are now?":
+      talk salva idle "It’s not a ladder. It’s a web. I’ve touched writing, design, code, localization… it all weaves together."
+
+    roll motivation empathy 13 "Would you say your motivation is more intrinsic or strategic?":
+      if motivation:
+        talk salva idle "I’m deeply driven by meaning. If a story doesn't say something, I lose interest."
       else:
-        talk salva idle "Answer to Question 2 (Failure)"
-    "Question 3 (Always)":
-      talk salva idle "Answer to Question 3 (Always)"
+        talk salva idle "Hah, I could say ‘both,’ but that’s a cop-out, isn’t it?"
+
+    roll burnout drive 15 "Have you ever lost motivation? What pulled you back?":
+      if burnout:
+        talk salva idle "Absolutely. I’ve burned out before. But telling stories that matter—that’s the spark."
+      else:
+        talk salva idle "Sure. I just power through. No tricks, just stubbornness."
+
+    "There’s a quiet logic behind your path. Did you plan this?" if (> (get_level logic) 3):
+      talk salva idle "I didn’t map it, but the signs were always there. I followed the threads."
+
   jump phase1
 
 phase2_jump:
@@ -44,4 +63,188 @@ phase2_jump:
   jump phase2
 
 phase2:
-  "Lorem ipsum dolor sit amet!!!"
+  if (>= $phases.phase2 2)
+    jump phase3_jump
+  run increase_phase
+
+  choice:
+    "Let's see what he can do."
+
+    "What’s a tool or engine you’ve loved working with, and why?":
+      talk salva idle "Unity, mostly. But not because it’s perfect—because it lets me iterate fast, fail fast, fix faster."
+
+    "Tell me about a technical challenge you’re proud of solving.":
+      talk salva idle "Once, I built a modular narrative system inside Moodle. Yes, Moodle. Don’t laugh."
+
+    roll creativity logic 14 "How do you balance code and creativity when deadlines hit?":
+      if creativity:
+        talk salva idle "I scope aggressively, and I chunk everything. That way, the story survives the sprint."
+      else:
+        talk salva idle "Balance? I crash headfirst, then patch the narrative. Not elegant, but honest."
+
+    roll skill_growth drive 15 "How do you keep your technical skills sharp while focusing on design?":
+      if skill_growth:
+        talk salva idle "Late nights, prototypes, learning from others. I like getting stuck—it means I’m growing."
+      else:
+        talk salva idle "I try… but I prioritize design these days."
+
+    "Your code reads like it’s designed for someone else. Is that intentional?" if (> (get_level intuition) 4):
+      talk salva idle "Always. If someone can’t pick up my work, I haven’t finished it."
+
+  jump phase2
+
+phase3_jump:
+  "Phase 3: Collaboration & Soft Skills"
+  set current_phase "phase3"
+  jump phase3
+
+phase3:
+  if (>= $phases.phase3 2)
+    jump phase4_jump
+  run increase_phase
+
+  choice:
+    "Nice, but can he work with others?"
+
+    "How do you handle feedback you disagree with?":
+      talk salva idle "I ask why. Not as a defense, but to map the mismatch."
+
+    "What kind of team brings out your best work?":
+      talk salva idle "One that’s kind, sharp, and not afraid of the weird."
+
+    roll collab_story empathy 14 "Describe a time when collaboration made your idea better.":
+      if collab_story:
+        talk salva idle "The best twist in Myself? Wasn't mine. A friend’s gut-punch suggestion. I just shaped it."
+      else:
+        talk salva idle "I like feedback. Sometimes it works. Sometimes… I ignore it."
+
+    roll team_value charisma 13 "What do you bring to a team, beyond your skillset?":
+      if team_value:
+        talk salva idle "Energy. Sincerity. A voice that asks ‘what if we went further?’"
+      else:
+        talk salva idle "I try to help. Maybe I talk too much."
+
+    "You seem tuned in. Ever play the team therapist?" if (> (get_level empathy) 4):
+      talk salva idle "Guilty. But I won’t force it unless I’m needed."
+
+  jump phase3
+
+phase4_jump:
+  "Phase 4: Design Thinking & Philosophy"
+  set current_phase "phase4"
+  jump phase4
+
+phase4:
+  if (>= $phases.phase4 2)
+    jump phase5_jump
+  run increase_phase
+
+  choice:
+    "What makes him tick?"
+
+    "What makes a story game-worthy?":
+      talk salva idle "Player agency. Otherwise, it’s just a short film with clicks."
+
+    "What design lesson took you the longest to learn?":
+      talk salva idle "That fun isn’t the only metric. Impact matters, even when it stings."
+
+    roll narrative_loop logic 15 "How do you balance narrative depth with gameplay loops?":
+      if narrative_loop:
+        talk salva idle "Narrative is the loop. If the story breathes inside the mechanics, you’ve won."
+      else:
+        talk salva idle "I… try. But I still prototype too many story-heavy ideas."
+
+    roll emotional_impact intuition 13 "What kind of emotions do you want players to walk away with?":
+      if emotional_impact:
+        talk salva idle "Recognition. A quiet ‘that was me’ when the credits roll."
+      else:
+        talk salva idle "I… I don’t know. I want to make them feel, but I’m still learning how."
+
+    "You mentioned systems earlier. Are you a narrative systems designer at heart?" if (> (get_level logic) 4):
+      talk salva idle "Yes. Systems tell stories too—if we let them."
+
+  jump phase4
+
+phase5_jump:
+  "Phase 5: Pressure Test / Red Flags"
+  set current_phase "phase5"
+  jump phase5
+
+phase5:
+  if (>= $phases.phase5 2)
+    jump phase6_jump
+  run increase_phase
+
+  choice:
+    "Let's see how he handles the heat."
+
+    "When have you failed? What did you learn?":
+      talk salva idle "Kenney Jam 2024. I had the mechanics. I had the vision. I didn’t finish. That still burns."
+
+    "What’s a blind spot you’re working on?":
+      talk salva idle "Polish. I overdesign systems. I’m learning when to let go."
+
+    roll adapt charisma 14 "How do you handle sudden changes in a project’s direction?":
+      if adapt:
+        talk salva idle "I try to rally people. If the core survives, we adapt."
+      else:
+        talk salva idle "Honestly? I get frustrated. Then I sulk. Then I get over it."
+
+    roll regret empathy 15 "Have you ever made a call you regret?":
+      if regret:
+        talk salva idle "Yes. I cut someone’s feature without asking. They were crushed. I apologized. I still think about it."
+      else:
+        talk salva idle "I try not to regret. But I’ve made calls I’d now tweak."
+
+    "You seem… relentless. Ever burn out?" if (> (get_level drive) 4):
+      talk salva idle "Yes. Multiple times. But the fire always comes back."
+
+  jump phase5
+
+phase6_jump:
+  "Phase 6: Wildcard / Playful / Weird"
+  set current_phase "phase6"
+  jump phase6
+
+phase6:
+  if (>= $phases.phase6 2)
+    jump interview_climax
+  run increase_phase
+
+  choice:
+    "And now, to end on a high note..."
+
+    "You get one genre to design in for the rest of your life. What is it?":
+      talk salva idle "Psychological puzzle-platformers. With jokes."
+
+    "What’s a game idea you’d greenlight even if it made zero money?":
+      talk salva idle "A silent rhythm game about aphasia. Wait—I’m already making it."
+
+    roll improv_game charisma 16 "Invent a game right now, from a random word.":
+      if improv_game:
+        talk salva idle "Okay—‘Dust.’ A game where you can’t see your enemies, only their footprints in ash."
+      else:
+        talk salva idle "Uhh… ‘Brick Simulator’? I’ll come back to you."
+
+    roll weird_mechanic logic 14 "What’s the weirdest mechanic you’ve ever imagined?":
+      if weird_mechanic:
+        talk salva idle "A turn-based game where time moves only if you don’t. Like, the opposite of Superhot."
+      else:
+        talk salva idle "I have this dice-based AI concept, but it’s still chaotic."
+
+    "You think in metaphors a lot. Ever thought of designing poetry into gameplay?" if (> (get_level intuition) 4):
+      talk salva idle "Always. Maybe one day I will."
+
+  jump phase6
+
+interview_climax:
+  "The room is still now. The hum of the screens has quieted, like they, too, are waiting."
+  "Salva adjusts the strange pendant around his neck—L’Amulet d’Auteur. It flickers once."
+  "You expected a final glow. A flash of brilliance. A triumphant shimmer."
+  "But there is none."
+  "Instead, something simpler, more profound:"
+  "His posture is upright. His eyes are steady. His voice—clear, calm, resolute."
+  "He didn’t need saving. Not this time."
+  "The amulet was not bright. It was fire."
+  "And the fire was him."
+  talk salva idle "So... how did I do?"

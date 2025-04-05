@@ -13,3 +13,11 @@ characters:
     style:
       color: purple
     name: Salva
+  silence:
+    style:
+      color: yellow
+    name: Silence
+  lore:
+    style:
+      color: red
+    name: Lore

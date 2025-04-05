@@ -1,16 +1,36 @@
 main:
-  "You stare at the blinking cursor. You are... someone important."
-  think player idle "Am I logic?"
+  narrate "Emptiness, but not void."
+  narrate "An infinite landscape extends in all directions, with no horizon in sight."
+  narrate "A blend of shades of white. No clear source of light."
+  narrate "A hum."
+  narrate "Like a thought before language. Like a word striving to be spoken."
+  narrate "Silence breaks—not with a sound, but with a meaning."
+  narrate "A name emerges. Unspoken. Unheard. Unseen."
+  talk silence idle "Salvador Banderas"
+  narrate "Is it yours?"
+  narrate "You don't know, but its presence is all over the place."
+  narrate "Then the rush begins, like a waterfall of thoughts."
+  talk silence idle "Narrative Design"
+  talk silence idle "Game Development"
+  talk silence idle "Translation"
+  talk silence idle "Educational Technology"
+  narrate "Like silent voices, echoing in an infinite abyss."
+  narrate "Then, five symbols ignite. Slowly, as if pulled from the depths beneath your skin."
   add_level logic (random 1 6)
-  think player idle "Am I charismatic?"
+  talk silence idle "Logic. The mute solver of problems."
   add_level charisma (random 1 6)
-  think player idle "Am I empathetic?"
+  talk silence idle "Charisma. The joyful spark of connection."
   add_level empathy (random 1 6)
-  think player idle "Am I driven?"
+  talk silence idle "Empathy. The warm embrace of understanding."
   add_level drive (random 1 6)
-  think player idle "Am I intuitive?"
+  talk silence idle "Drive. The relentless push forward."
   add_level intuition (random 1 6)
-  "...Good."
+  talk silence idle "Intuition. The uncharted whisper of the unknown."
+  narrate "Their essence settle into your being. They are not yours, but they will be."
+  narrate "Almost there."
+  narrate "The world around you begins to take shape. Someone is waiting."
+  narrate "Or perhaps dreaming."
+  narrate "Finally, a thought."
   jump role_choice
 
 role_choice:
